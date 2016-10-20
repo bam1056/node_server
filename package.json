@@ -1,0 +1,22 @@
+{
+  "name": "node_server",
+  "version": "1.0.0",
+  "description": "Creating a server using only Node.js and JS to query a weather API and display the current temperature of several local cities when navigating to localhost:3000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node index.js"
+  },
+  "keywords": [
+    "Node.js",
+    "server",
+    "javascript"
+  ],
+  "author": "Brett Macy",
+  "license": "ISC",
+  "dependencies": {},
+  "engines": {
+    "node": "6.7.0",
+    "npm": "3.10.7"
+  }
+}
