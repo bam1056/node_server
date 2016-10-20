@@ -4,11 +4,18 @@ const http = require('http');
 const PORT=3000;
 
 function handleRequest(request, response){
-    http.get("http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=f58e6b9d8cfa1227c5f00c181491d8e4",  function(res) {
+    http.get("http://api.openweathermap.org/data/2.5/group?id=4171563,4174757,4173558,4148757&appid=f58e6b9d8cfa1227c5f00c181491d8e4",  function(res) {
       res.setEncoding('utf8');
       res.on('data', (chunk) => {
-        let data = JSON.parse(chunk)
-        response.end('It Works!! Path Hit' + data.main.temp);
+        let data = JSON.parse(chunk);
+        const styles='"display: flex; flex-direction: column; text-align: center; background-color:#61CEED; height:100%"'
+
+        let temps = data.list.map(city => {
+          const F = Math.floor(1.8*(city.main.temp - 273) + 32);
+          return (` <p><strong>${city.name} Average Temp:</strong> ${F}deg F\n\n</p>`)
+        });
+
+        response.end(`<div style=${styles}><h1>Welcome to the Weather Server!</h1>${temps.join('')}</div>`);
       });
     })
 
