@@ -1,7 +1,9 @@
 const http = require('http');
 
+// port for server to listen on
 const PORT=3000;
 
+// function to handle the request to the server
 function handleRequest(request, response) {
   request.on('error', function(err) {
     console.error(err);
@@ -9,6 +11,7 @@ function handleRequest(request, response) {
     response.end("THERE WAS AN ERROR");
   });
 
+  // server side request to the Open Weather API
   http.get("http://api.openweathermap.org/data/2.5/group?id=4171563,4174757,4173558,4148757&appid=f58e6b9d8cfa1227c5f00c181491d8e4",  function(res) {
     res.setEncoding('utf8');
     res.on('error', function(error){
