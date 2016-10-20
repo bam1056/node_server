@@ -17,14 +17,15 @@ function handleRequest(request, response) {
 
     res.on('data', (chunk) => {
       let data = JSON.parse(chunk);
-      const styles='"display: flex; flex-direction: column; text-align: center; background-color:#61CEED; height:100%"'
-
+      const styles='"display: flex; flex-direction: column; text-align: center; background-color:#61CEED; height:100%;"'
+      let avgTemp = data.list.map(city => city.main.temp).reduce((prev, curr) => prev + curr) / 4;
+      let fahrAvgTemp = Math.floor(1.8*(avgTemp - 273) + 32);
       let temps = data.list ? data.list.map(city => {
         const F = Math.floor(1.8*(city.main.temp - 273) + 32);
-        return (` <p><strong>${city.name} Average Temp:</strong> ${F}&deg; F\n\n</p>`)
+        return (` <p><strong>${city.name} Current Temp:</strong> ${F}&deg; F\n\n</p>`)
       }) : ['We apologize, but it seems there was an error with the server request. Please try again later.'];
 
-      response.end(`<div style=${styles}><h1>Welcome to the Weather Server!</h1>${temps.join('')}</div>`);
+      response.end(`<div style=${styles}><h1>Welcome to the Weather Server!</h1>${temps.join('')}<h3 style="border: 1px solid black;">Average Temp in Area: ${fahrAvgTemp}&deg;F</h3></div>`);
     });
   });
 }
