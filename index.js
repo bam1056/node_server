@@ -12,7 +12,7 @@ function handleRequest(request, response){
 
         let temps = data.list.map(city => {
           const F = Math.floor(1.8*(city.main.temp - 273) + 32);
-          return (` <p><strong>${city.name} Average Temp:</strong> ${F}deg F\n\n</p>`)
+          return (` <p><strong>${city.name} Average Temp:</strong> ${F}&deg; F\n\n</p>`)
         });
 
         response.end(`<div style=${styles}><h1>Welcome to the Weather Server!</h1>${temps.join('')}</div>`);
